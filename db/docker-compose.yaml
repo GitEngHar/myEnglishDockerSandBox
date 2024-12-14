@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  sample-database:
+    image: mysql
+    container_name: myenglishdb
+#    volumes:
+#      - ./db/data:/var/lib/mysql
+#      - ./db/conf.d:/etc/mysql/conf.d
+    environment:
+      - MYSQL_DATABASE=myenglishdb
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=Password1
+    ports:
+      - "3306:3306"
