@@ -1,15 +1,10 @@
 version: '3.9'
 services:
-  sample-redis:
-    image: redis:7.2.4-alpine
-    container_name: myenglishcache
-    ports:
-      - "6800:6379"
   sample-mysql:
     image: mysql
-    container_name: myenglishdb
+    container_name: bean_db
     environment:
-      - MYSQL_DATABASE=myenglishdb
+      - MYSQL_DATABASE=bean_db
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=Password1
