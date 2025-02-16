@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-  sample-mysql:
+  hotel_db:
     image: mysql
     container_name: hotel_db
     environment:
@@ -8,5 +8,31 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "3306:3306"
+    networks:
+      - hotel_network
+
+  hotelbills:
+    image: hotelbills
+    ports:
+      - "50051:50051"
+    depends_on:
+      - hotel_db
+    networks:
+      - hotel_network
+
+  hotelbills-client:
+    image: reserveclientlocal
+    ports:
+      - "50052:50052"
+    depends_on:
+      - hotelbills
+    networks:
+      - hotel_network
+
+networks:
+  hotel_network:
+    driver: bridge

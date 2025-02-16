@@ -10,6 +10,11 @@ docker exec -it hotel_db /bin/bash
 mysql --host=localhost --user=root --password=password hotel_db
 ```
 
+- 停止しているコンテナを全て削除
+```shell
+docker container prune -f
+```
+
 - Billsホテルテーブルの構築
 ```mysql
 CREATE TABLE IF NOT EXISTS hotels 
@@ -25,6 +30,6 @@ CREATE TABLE IF NOT EXISTS reserve_hotel
      userid INT ,
      reserved_unix_datetime int, 
      checkin_unix_datetime int,
-     foreign key hotel_id_foreign_key (hotelid) references hotels (id),
+     foreign key hotel_id_foreign_key (hotelid) references hotels (id)
 );
 ```
